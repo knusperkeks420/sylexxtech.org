@@ -25,6 +25,26 @@
     padding: 0;
     height: 100vh;
   }
+
+  /* Page transition */
+body {
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* When page is ready */
+body.page-loaded {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+/* Fade-out animation */
+body.fade-out {
+  opacity: 0;
+  filter: blur(12px);
+}
+
 .socials {
   display: flex;
   gap: 18px;
@@ -292,4 +312,27 @@ a:visited {
 
 </body>
 </html>
+<script>
+  // Fade-in on load
+  window.addEventListener("load", () => {
+    document.body.classList.add("page-loaded");
+  });
 
+  // Fade-out on link click
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+
+    const url = link.href;
+
+    // ignore anchors, hashes, JS links
+    if (!url || url.includes("#") || url.startsWith("javascript:")) return;
+
+    e.preventDefault();
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 50); // match CSS transition
+  });
+</script>
