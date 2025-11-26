@@ -1,0 +1,332 @@
+<!doctype html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-pVU3w5JHkKUgMZqh9Bf+F1+g5t/4FwO1+ebv+H3QeV+4mA5dHS6SbV0r+R+U9hOJ+oZ1D3X2DgR+OyhpQpFfJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nullteam — Home</title>
+<style>
+  
+  /* Reset + base */
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: #050505;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    align-items: center; /* vertical center */
+    justify-content: center; /* horizontal center */
+    padding: 0;
+    height: 100vh;
+  }
+
+  /* Page transition */
+body {
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* When page is ready */
+body.page-loaded {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+/* Fade-out animation */
+body.fade-out {
+  opacity: 0;
+  filter: blur(12px);
+}
+
+.socials {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.socials a {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px; /* icon size */
+  opacity: 0.95;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
+  transition: all 0.2s ease;
+}
+
+.socials a:hover {
+  color: #ffffff; /* example hover color, adjust per icon */
+  transform: translateY(-2px);
+}
+
+.status {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 22px;
+  font-size: 11px;
+  color: #9fb0c6;
+  opacity: 0.8;
+}
+
+  /* Top center nav pill */
+  .top-nav {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 18px;
+    display: flex;
+    gap: 10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius: 999px;
+    padding: 6px 10px;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(104, 104, 104, 0.199);
+    z-index: 60;
+  }
+  .top-nav a {
+    display: inline-block;
+    font-size: 12px;
+    color: #d9d9d9;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 999px;
+    transition: all .18s ease;
+  }
+  .top-nav a:hover {
+    background: rgba(255,255,255,0.02);
+    color: #fff;
+  }
+
+  /* Main hero container */
+  .hero-wrap {
+    width: 88%;
+    max-width: 920px;
+    margin: 0 auto; /* horizontal center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    border-radius: 34px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 36px 40px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.82) 0%, rgba(8,8,10,0.85) 40%, rgba(4,4,6,0.95) 100%);
+    border: 1px solid rgba(120,130,150,0.12);
+  }
+
+  /* faint rim highlight */
+  .hero:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.0) 25%);
+    mix-blend-mode: overlay;
+  }
+
+  /* background image */
+  .hero .bg-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('/mnt/data/823be8d5-738b-476a-8f55-5cc13ba022bf.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.78;
+    filter: blur(10px) contrast(0.85) grayscale(0.05);
+    transform: scale(1.06);
+    mix-blend-mode: screen;
+  }
+
+  /* decorative blurred blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(28px);
+    opacity: .65;
+    mix-blend-mode: normal;
+    background: linear-gradient(180deg,#5a60686e,#3a3f44bf);
+  }
+  .blob.one { width: 34%; height: 62%; left: 4%; bottom: -6%; transform: rotate(-8deg); opacity: 0.55; }
+  .blob.two { width: 42%; height: 46%; right: -6%; top: -4%; transform: rotate(12deg); opacity: 0.6; }
+
+  /* center content */
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  height: 100%; /* ADD THIS */
+}
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+  h1 {
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 56px;
+    line-height: 1;
+    color: #fff;
+  }
+  h1 .dotcx {
+    color: #727272;
+    font-weight: 700;
+    font-size: 30px;
+    margin-left: 8px;
+    letter-spacing: 0;
+    vertical-align: middle;
+    opacity: .95;
+  }
+
+  /* Purchase button */
+  .purchase {
+    display: inline-block;
+    padding: 10px 28px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #ddd;
+    font-size: 13px;
+    text-decoration: none;
+
+  }
+
+
+  /* social icon row */
+  .socials {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .socials a {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.95;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
+  }
+  .socials svg { width: 20px; height: 20px; display: block; }
+
+  /* bottom status link */
+  .status {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 22px;
+    font-size: 11px;
+    color: #727272;
+    opacity: 0.8;
+  }
+
+  /* small screens */
+  @media (max-width: 720px) {
+    .hero { height: 360px; border-radius: 22px; padding: 28px; }
+    h1 { font-size: 40px; }
+    h1 .dotcx { font-size: 22px; }
+    .top-nav { top: 10px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="top-nav" aria-label="top navigation">
+    <a href="profile.html">Profile</a>
+    <a href="profile.html">Products</a>
+    <a href="https://discord.gg/bBwF9Z5274">Discord</a>
+  </nav>
+
+  <main class="hero-wrap" role="main" aria-labelledby="site-title">
+    <section class="hero" aria-hidden="false">
+      <!-- background image -->
+      <div class="bg-image" aria-hidden="true"></div>
+
+      <!-- decorative blurred blobs -->
+      <div class="blob one" aria-hidden="true"></div>
+      <div class="blob two" aria-hidden="true"></div>
+
+      <!-- center content -->
+      <div class="content">
+        <h1 id="site-title">NULLTEAM<span class="dotcx">.cc</span></h1>
+
+        <a href="profile.html" class="purchase" role="button" aria-label="purchase">Purchase</a>
+
+  <div class="socials" aria-hidden="false" title="socials">
+  <a href="https://discord.gg/bBwF9Z5274" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+  <a href="https://t.me/Nullteam1337" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+  <a href="https://www.youtube.com/@knusperkeks_420" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+  </div>
+</div>
+
+</section>
+</main>
+
+<!-- Bottom status link -->
+<a class="status" href="tos.html" aria-label="URSA status">Terms of Service</a>
+
+</body>
+</html>
+<script>
+  // Fade-in on load
+  window.addEventListener("load", () => {
+    document.body.classList.add("page-loaded");
+  });
+
+  // Fade-out on link click
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+
+    const url = link.href;
+
+    // ignore anchors, hashes, JS links
+    if (!url || url.includes("#") || url.startsWith("javascript:")) return;
+
+    e.preventDefault();
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 50); // match CSS transition
+  });
+</script>
