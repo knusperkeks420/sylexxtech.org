@@ -8,6 +8,122 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+.popup {
+  position: absolute;
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 18px;
+  width: 220px;
+  display: none;
+  z-index: 99999;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+}
+
+/* Popup select styling */
+.popup select {
+  width: 100%;
+  padding: 10px 12px;
+  background: #1a1a1a;       /* dark background */
+  color: #ccc;                /* text color */
+  border: none;               /* remove border */
+  border-radius: 12px;        /* rounded corners */
+  outline: none;              /* remove focus outline */
+  -webkit-appearance: none;   /* remove default Chrome/Safari style */
+  -moz-appearance: none;      /* remove Firefox style */
+  appearance: none;           /* remove general default style */
+  cursor: pointer;
+}
+
+/* Remove focus glow/border */
+.popup select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Option styling */
+.popup select option {
+  background: #1a1a1a;
+  color: #ccc;
+  padding: 8px 12px;
+}
+
+/* Option hover effect */
+.popup select option:hover {
+  background: rgba(255, 255, 255, 0.05); /* subtle hover highlight */
+  color: #fff;
+}
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 10px 30px 10px 12px; /* space for arrow on the right */
+  background: #1a1a1a;
+  color: #ccc;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+/* Custom arrow */
+.select-wrapper .arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8px;   /* make it smaller */
+  line-height: 1;
+  pointer-events: none;
+  color: #cfcfcf;
+}
+
+
+/* Optional: add a subtle arrow for the select */
+.popup select::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #cfcfcf;
+}
+
+/* Popup button styling */
+.popup button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* Remove default IE dropdown arrow */
+.popup select::-ms-expand {
+  display: none;
+}
+
+/* Dropdown animation */
+.popup select[open] option {
+  animation: dropdownFade .22s ease;
+}
+
+
+
 .top-nav {
     position: fixed;
     left: 50%;
@@ -607,6 +723,21 @@ a:visited {
 </style>
 </head>
 <body>
+<!-- POPUP ELEMENT -->
+<div id="downloadPopup" class="popup">
+<label style="font-size:13px; color:#c2c2c2;">Select product</label>
+<div class="select-wrapper">
+  <select id="productSelect">
+    <option value="onetap">Onetap</option>
+    <option value="fatality">Fatality</option>
+    <option value="gamesense">Gamesense</option>
+    <option value="compkiller">Compkiller</option>
+  </select>
+  <span class="arrow">▼</span>
+</div>
+
+<button id="downloadBtn">Download</button>
+</div>
 
 <!-- Overlay loader -->
 <!-- Centered loading spinner -->
@@ -715,6 +846,46 @@ window.addEventListener("load", () => {
 });
 </script>
 
+<script>
+// OPEN POPUP AT MOUSE POSITION
+const downloadLink = document.querySelector('.download a');
+const popup = document.getElementById('downloadPopup');
+const dlBtn = document.getElementById('downloadBtn');
+
+
+// open popup where the mouse is
+window.addEventListener('click', function(e){
+if(e.target === downloadLink){
+e.preventDefault();
+popup.style.display = 'block';
+popup.style.left = e.pageX + 'px';
+popup.style.top = e.pageY + 'px';
+}
+});
+
+
+// close popup if clicking outside
+window.addEventListener('click', function(e){
+if(!popup.contains(e.target) && e.target !== downloadLink){
+popup.style.display = 'none';
+}
+});
+
+
+// download handling
+const fileLinks = {
+onetap: 'profile.html',
+fatality: 'profile.html',
+gamesense: 'profile.html',
+compkiller: 'profile.html'
+};
+
+
+dlBtn.addEventListener('click', () => {
+const product = document.getElementById('productSelect').value;
+window.location.href = fileLinks[product];
+});
+</script>
 
 </script>
 
