@@ -1,329 +1,505 @@
-<!doctype html>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-pVU3w5JHkKUgMZqh9Bf+F1+g5t/4FwO1+ebv+H3QeV+4mA5dHS6SbV0r+R+U9hOJ+oZ1D3X2DgR+OyhpQpFfJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Nullteam — Home</title>
 <style>
-  
-  /* Reset + base */
-  * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: #050505;
-    color: #fff;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    align-items: center; /* vertical center */
-    justify-content: center; /* horizontal center */
-    padding: 0;
-    height: 100vh;
-  }
-
-  /* Page transition */
-body {
-  opacity: 0;
-  filter: blur(10px);
-  transition: opacity 0.3s ease, filter 0.3s ease;
-}
-
-/* When page is ready */
-body.page-loaded {
-  opacity: 1;
-  filter: blur(0px);
-}
-
-/* Fade-out animation */
-body.fade-out {
-  opacity: 0;
-  filter: blur(12px);
-}
-
-.socials {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 6px;
-}
-
-.socials a {
-  display: inline-flex;
-  width: 34px;
-  height: 34px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: transparent;
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px; /* icon size */
-  opacity: 0.95;
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
-  transition: all 0.2s ease;
-}
-
-.socials a:hover {
-  color: #ffffff; /* example hover color, adjust per icon */
-  transform: translateY(-2px);
-}
-
-.status {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 22px;
-  font-size: 11px;
-  color: #9fb0c6;
-  opacity: 0.8;
-}
-
-  /* Top center nav pill */
-  .top-nav {
+     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+        width: 100%;
+        min-height: 100vh;
+        background: #0a0a0a ;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        color: #e6e6e6;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 15px 20px 15px;  /* ← changed 20px top to 0 */
+        height: 100vh;
+    overflow: hidden !important;
     position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 18px;
-    display: flex;
-    gap: 10px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border-radius: 999px;
-    padding: 6px 10px;
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(104, 104, 104, 0.199);
-    z-index: 60;
-  }
-  .top-nav a {
-    display: inline-block;
-    font-size: 12px;
-    color: #d9d9d9;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 999px;
-    transition: all .18s ease;
-  }
-  .top-nav a:hover {
-    background: rgba(255,255,255,0.02);
-    color: #fff;
-  }
+    }
 
-  /* Main hero container */
-  .hero-wrap {
-    width: 88%;
-    max-width: 920px;
-    margin: 0 auto; /* horizontal center */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    .container {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 1400px;
+        margin-top: 60px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-  .hero {
-    position: relative;
+    /* Sidebar */
+    .sidebar {
+        width: 280px;
+        min-width: 260px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 16px;
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
+        padding: 24px 0 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .username {
+        text-align: center;
+        font-weight: 600;
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+    .meta {
+        text-align: center;
+        font-size: 12px;
+        color: #9aa3ad;
+        margin-bottom: 32px;
+    }
+    .menu {
+        padding: 0 18px;
+        flex-grow: 1;
+    }
+    .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #cfcfcf;
+        text-decoration: none !important;
+        transition: background 0.25s;
+        margin-bottom: 4px;
+    }
+    .menu-item:hover {
+        background: rgba(0, 0, 0, 0.06);
+    }
+    .menu-item i {
+        width: 20px;
+        text-align: center;
+        color: #cbd3da;
+    }
+
+  .loader {
+    position: fixed;
     width: 100%;
-    height: 420px;
-    border-radius: 34px;
-    overflow: hidden;
+    height: 100%;
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  .top-line {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #ffffff, #ffffff, #ffffff);
+    background-size: 300% 100%;
+    animation: gradientMove 6s linear infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .logo {
+    color: #fff;
+    font-size: 4rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 36px 40px;
-     background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(120,130,150,0.12);
+    gap: 0.5rem;
+    font-family: 'Raleway', Verdana, sans-serif;
+
   }
 
-  /* faint rim highlight */
-  .hero:before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.0) 25%);
-    mix-blend-mode: overlay;
+  .please-wait {
+    margin-top: 0;
+    padding-bottom: 15px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-family: 'Raleway', Verdana, sans-serif;
+
   }
 
-  /* background image */
-  .hero .bg-image {
-    position: absolute;
-    inset: 0;
-    background-image: url('/mnt/data/823be8d5-738b-476a-8f55-5cc13ba022bf.png');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.78;
-    filter: blur(10px) contrast(0.85) grayscale(0.05);
-    transform: scale(1.06);
-    mix-blend-mode: screen;
+  .dots {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 10px;
   }
 
-  /* decorative blurred blobs */
-  .blob {
-    position: absolute;
+  .dots span {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
     border-radius: 50%;
-    filter: blur(28px);
-    opacity: .65;
-    mix-blend-mode: normal;
-
-  }
-  .blob.one { width: 34%; height: 62%; left: 4%; bottom: -6%; transform: rotate(-8deg); opacity: 0.55; }
-  .blob.two { width: 42%; height: 46%; right: -6%; top: -4%; transform: rotate(12deg); opacity: 0.6; }
-
-  /* center content */
-.content {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  height: 100%; /* ADD THIS */
-}
-a,
-a:hover,
-a:focus,
-a:active,
-a:visited {
-  text-decoration: none;
-}
-
-  h1 {
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 56px;
-    line-height: 1;
-    color: #fff;
-  }
-  h1 .dotcx {
-    color: #727272;
-    font-weight: 700;
-    font-size: 30px;
-    margin-left: 8px;
-    letter-spacing: 0;
-    vertical-align: middle;
-    opacity: .95;
-  }
-
-  /* Purchase button */
-  .purchase {
     display: inline-block;
-    padding: 10px 28px;
-    border-radius: 22px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border: 1px solid rgba(255,255,255,0.06);
-    color: #ddd;
-    font-size: 13px;
-    text-decoration: none;
-
+    animation: bounce 1s infinite;
   }
 
+  .dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
 
-  /* social icon row */
-  .socials {
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+    /* Panels */
+    .panels {
+        flex: 1;
+        max-width: 860px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    .panel {
+        background: rgba(255,255,255,0.03);
+        border-radius: 14px;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+        padding-bottom: 10px;
+    }
+    .panel-title {
+        padding: 18px 22px 4px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .panel-sub {
+        padding: 0 22px 16px;
+        font-size: 12px;
+        color: #8d96a0;
+    }
+    .input-row {
+        display: flex;
+        gap: 10px;
+        padding: 0 22px 16px;
+        flex-wrap: wrap;
+    }
+    .input {
+        flex: 1;
+        min-width: 200px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        color: #e6e6e6;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 14px;
+        outline: none;
+    }
+    .button {
+        width: 120px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 10px;
+        color: #e8e8e8;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+        height: 46px;
+    }
+    .button:hover { background: rgba(255,255,255,0.06); }
+
+    /* Subscription cards */
+    .sub {
+        margin: 10px 22px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 14px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        transition: background 0.2s;
+    }
+    .sub:hover { background: rgba(255,255,255,0.06); }
+    .sub-left { display: flex; align-items: center; gap: 14px; }
+    .icon-box {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #2b1444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #d95cff;
+        flex-shrink: 0;
+    }
+    .sub-title { font-size: 14px; font-weight: 600; }
+    .sub-sub { font-size: 12px; color: #7f8892; }
+    .buy-btn {
+        width: 70px;
+        height: 36px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 10px;
+        color: #e0e0e0;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        flex-shrink: 0;
+    }
+    .buy-btn:hover { background: rgba(255,255,255,0.06); }
+
+    a { text-decoration: none !important; color: inherit; }
+
+    /* =============================================================================
+       RESPONSIVE BREAKPOINTS
+       ============================================================================= */
+
+    /* iPad Pro & large tablets (≤1024px) */
+    @media (max-width: 1024px) {
+        .container {
+            gap: 30px;
+            margin-top: 10px;
+        }
+        .sidebar {
+            width: 260px;
+        }
+        .panels {
+            max-width: 700px;
+        }
+    }
+
+    /* iPad / Tablet portrait & small laptops (≤868px) */
+    @media (max-width: 868px) {
+        .container {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        .sidebar {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            padding: 20px 0;
+        }
+        .panels {
+            max-width: 600px;
+        }
+    }
+.container {
+    /* your existing properties */
+    max-height: 100vh;
+    overflow: hidden;
+}
+    /* Mobile phones (≤480px) */
+    @media (max-width: 480px) {
+        body {
+            padding: 15px 10px;
+        }
+        .container {
+            gap: 24px;
+        }
+        .sidebar {
+            width: 100%;
+            max-width: none;
+            padding: 18px 0;
+        }
+        .username { font-size: 22px; }
+        .menu-item {
+            font-size: 15px;
+            padding: 14px 16px;
+        }
+        .panel-title {
+            font-size: 15px;
+            padding: 16px 18px 4px;
+        }
+        .panel-sub {
+            padding: 0 18px 14px;
+            font-size: 11.5px;
+        }
+        .input-row {
+            padding: 0 18px 14px;
+            flex-direction: column;
+        }
+        .input {
+            min-width: auto;
+        }
+        .button {
+            width: 100%;
+            height: 48px;
+        }
+        .sub {
+            margin: 10px 18px;
+            padding: 0 14px;
+            height: 78px;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 10px;
+        }
+        .sub-left {
+            width: 100%;
+            justify-content: space-between;
+        }
+        .buy-btn {
+            align-self: flex-end;
+        }
+    }
+.icon-box {
+    width: 40px;
+    height: 40px;
     display: flex;
-    gap: 18px;
     align-items: center;
     justify-content: center;
-    margin-top: 6px;
-  }
-  .socials a {
-    display: inline-flex;
-    width: 34px;
-    height: 34px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: transparent;
-    color: #fff;
-    text-decoration: none;
-    opacity: 0.95;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
-  }
-  .socials svg { width: 20px; height: 20px; display: block; }
+    border-radius: 12;
+}
+.icon-img {
+    border-radius: 8px; /* or 50% for a circle */
+}
 
-  /* bottom status link */
-  .status {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 22px;
-    font-size: 11px;
-    color: #727272;
-    opacity: 0.8;
-  }
+.icon-img {
+    width: 100%;
+    height: 100%;
+  border-radius: 12;
+    object-fit: contain;
+}
 
-  /* small screens */
-  @media (max-width: 720px) {
-    .hero { height: 360px; border-radius: 22px; padding: 28px; }
-    h1 { font-size: 40px; }
-    h1 .dotcx { font-size: 22px; }
-    .top-nav { top: 10px; }
-  }
+    /* Very small phones (≤360px) */
+    @media (max-width: 360px) {
+        .sub-left {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+    }
 </style>
 </head>
 <body>
-
-
-
-  <main class="hero-wrap" role="main" aria-labelledby="site-title">
-    <section class="hero" aria-hidden="false">
-      <!-- background image -->
-      <div class="bg-image" aria-hidden="true"></div>
-
-      <!-- decorative blurred blobs -->
-      <div class="blob one" aria-hidden="true"></div>
-      <div class="blob two" aria-hidden="true"></div>
-
-      <!-- center content -->
-      <div class="content">
-        <h1 id="site-title">NULLTEAM<span class="dotcx">.cc</span></h1>
-
-        <a href="profile.html" class="purchase" role="button" aria-label="purchase">Purchase</a>
-
-  <div class="socials" aria-hidden="false" title="socials">
-  <a href="https://discord.gg/haYNVmcHfH" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-  <a href="https://t.me/Nullteam1337" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-  <a href="https://www.youtube.com/@knusperkeks_420" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <div class="loader" id="loader">
+  <div class="top-line"></div>
+  <div class="logo">nullteam</div>
+  <div class="please-wait">Please wait</div>
+  <div class="dots">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
 
-</section>
-</main>
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="username">Nullteam.cc</div>
+        <div class="meta">© 2025 - 2025 nullteam</div>
+        <div class="menu">
+            <a href="nigger.html" class="menu-item">
+                <i class="fa-solid fa-user"></i> Subscriptions
+            </a>
+            <a href="https://discord.gg/bBwF9Z5274" class="menu-item">
+                <i class="fa-solid fa-shield-halved"></i> Security
+            </a>
+            <a href="https://discord.gg/bBwF9Z5274" target="_blank" class="menu-item">
+                <i class="fa-solid fa-circle-question"></i> Support
+            </a>
+            <a href="index.html" download class="menu-item">
+                <i class="fa-solid fa-download"></i> Download Loader
+            </a>
+        </div>
+    </div>
 
-<!-- Bottom status link -->
-<a class="status" href="tos.html" aria-label="URSA status">Terms of Service</a>
+    <!-- Main Panels -->
+    <div class="panels">
+        <div class="panel" id="panel1">
+            <div class="panel-title"><i class="fa-solid fa-microchip"></i> Hardware ID Reset</div>
+            <div class="panel-sub">Available every 2 weeks</div>
+            <div class="input-row">
+                <input class="input" placeholder="(Optional) Reason for reset"/>
+                <div class="button"><i class="fa-solid fa-rotate-right"></i> Reset</div>
+            </div>
+        </div>
 
+        <div class="panel" id="panel2">
+            <div class="panel-title"><i class="fa-solid fa-key"></i> Key Activation</div>
+            <div class="panel-sub">Activate your key.</div>
+            <div class="input-row">
+                <input class="input" placeholder="Enter your key code"/>
+                <div class="button"><i class="fa-solid fa-bolt"></i> Activate</div>
+            </div>
+        </div>
+
+        <div class="panel" id="panel3">
+            <div class="panel-title"><i class="fa-solid fa-cart-shopping"></i> Subscriptions</div>
+            <div class="panel-sub">Feel the excellence in a few clicks</div>
+            <div class="sub">
+                <div class="sub-left">
+                    <div class="icon-box">
+    <img src="fatal.jpg" alt="Logo" class="icon-img">
+</div>
+
+                    <div>
+                        <div class="sub-title">[CS:2] Fatality</div>
+                        <div class="sub-sub"><i class="fa-solid fa-moon"></i> No active subscription</div>
+                    </div>
+                </div>
+<a href="https://nullteam.mysellauth.com/product/fatality" class="buy-btn" target="_blank">
+    <i class="fa-solid fa-cart-shopping"></i> Buy
+</a>
+            </div>
+            <div class="sub">
+                <div class="sub-left">
+                    <div class="icon-box">
+    <img src="neverlose.jpg" alt="Logo" class="icon-img">
+</div>
+
+                    <div>
+                        <div class="sub-title">[CS:GO] Neverlose</div>
+                        <div class="sub-sub"><i class="fa-solid fa-moon"></i> No active subscription</div>
+                    </div>
+                </div>
+<a href="https://nullteam.mysellauth.com/product/neverlose" class="buy-btn" target="_blank">
+    <i class="fa-solid fa-cart-shopping"></i> Buy
+</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.classList.add('fade-out');
+    setTimeout(() => {
+      loader.style.display = 'none';
+      document.getElementById('site').style.display = 'block';
+    }, 500);
+  }, 3500);
+</script>
 </body>
 </html>
-<script>
-  // Fade-in on load
-  window.addEventListener("load", () => {
-    document.body.classList.add("page-loaded");
-  });
-
-  // Fade-out on link click
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (!link) return;
-
-    const url = link.href;
-
-    // ignore anchors, hashes, JS links
-    if (!url || url.includes("#") || url.startsWith("javascript:")) return;
-
-    e.preventDefault();
-    document.body.classList.add("fade-out");
-
-    setTimeout(() => {
-      window.location.href = url;
-    }, 50); // match CSS transition
-  });
-</script>
-
